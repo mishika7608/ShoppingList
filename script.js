@@ -16,7 +16,6 @@ function createButton(classes){
     return button;
 }
 
-
 function addItem(e){
     e.preventDefault();
     const newItem =itemInput.value;
@@ -29,14 +28,19 @@ function addItem(e){
     const li = document.createElement('li');
     li.appendChild(document.createTextNode(newItem));
     console.log(li);
-    
+
     const button = createButton('remove-item btn-link text-red');
     li.appendChild(button);
     itemList.appendChild(li);
     itemInput.value='';
 }
 
-
+function removeItem(e){
+    if (e.target.parentElement.classList.contains('remove-item')){
+        e.target.parentElement.parentElement.remove();
+    }
+}
 
 //Event Listener
 itemForm.addEventListener('submit',addItem);
+itemList.addEventListener('click',removeItem)
