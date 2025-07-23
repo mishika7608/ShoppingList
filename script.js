@@ -5,6 +5,12 @@ const clearBtn = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
 const items = itemList.querySelectorAll('li');
 
+function displayItems(){
+    const itemsFromStorage = getItemsFromStorage();
+    itemsFromStorage.forEach(item => addItemToDOM(item));
+    checkUI();
+}
+
 function createIcon(classes){
     const icon = document.createElement('i');
     icon.className = classes;
@@ -110,9 +116,15 @@ function checkUI(){
     }
 }
 
-//Event Listener
-itemForm.addEventListener('submit',onAddItemSubmit);
-itemList.addEventListener('click',removeItem)
-clearBtn.addEventListener('click',clearItems)
-itemFilter.addEventListener('input',filterItems)
-checkUI();
+//Initialize app
+function init(){
+    //Event Listener
+    itemForm.addEventListener('submit',onAddItemSubmit);
+    itemList.addEventListener('click',removeItem)
+    clearBtn.addEventListener('click',clearItems)
+    itemFilter.addEventListener('input',filterItems)
+    document.addEventListener('DOMContentLoaded',displayItems)
+    checkUI();
+}
+
+init();
